@@ -1,0 +1,32 @@
+{
+  "name": "sherpa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "scrape": "ts-node-dev src/scripts/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "async": "^3.2.6",
+    "axios": "^1.10.0",
+    "clipboardy": "^4.0.0",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0",
+    "pdf-parse": "^1.1.1",
+    "playwright": "^1.54.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.0.13",
+    "@types/pdf-parse": "^1.1.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}

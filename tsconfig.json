@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2020",
+    "sourceMap": true,
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "typeRoots": ["types", "node_modules/@types"],
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src/*", "src/**/*"]
+}
