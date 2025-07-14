@@ -2,7 +2,10 @@ import fs from "fs";
 import pdf from "pdf-parse";
 import { Page } from "playwright";
 import { exec } from "child_process";
-
+/**
+ * Extrae el código de acceso del texto de un PDF.
+ * Busca por el patrón "acceso: CODIGO".
+ */
 export async function extraerCodigoPDF(ruta: string): Promise<string | null> {
   const dataBuffer = fs.readFileSync(ruta);
 
@@ -14,7 +17,9 @@ export async function extraerCodigoPDF(ruta: string): Promise<string | null> {
     console.error("🔴 Error al parsear PDF:", err);
   }
 }
-
+/**
+ * Descarga el PDF solo si no existe en el path destino.
+ */
 export async function descargarPDF(
   page: Page,
   pdfPath: string,
@@ -31,7 +36,9 @@ export async function descargarPDF(
     console.log(`📄 Ya existe PDF en: ${pdfPath}`);
   }
 }
-
+/**
+ * Repara un PDF utilizando Ghostscript (gswin64c), y guarda el resultado.
+ */
 async function repararPDF(
   inputPath: string,
   outputPath?: string
@@ -50,7 +57,9 @@ async function repararPDF(
     });
   });
 }
-
+/**
+ * Realiza la reparación de un PDF y reemplaza el original si fue exitoso.
+ */
 export async function repararYReemplazarPDF(pdfPath: string): Promise<boolean> {
   const pdfTmp = pdfPath + ".tmp";
   const reparado = await repararPDF(pdfPath, pdfTmp);

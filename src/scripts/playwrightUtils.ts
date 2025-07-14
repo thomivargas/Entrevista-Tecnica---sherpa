@@ -5,12 +5,15 @@ import { chromium, Page, Browser } from "playwright";
 // Carpeta de descargas
 export const downloadsDir = path.resolve(__dirname, "../downloads");
 
-// Crea carpeta si no existe
+// Crea la carpeta de descargas si no existe.
 export function crearCarpetaDownloads() {
   if (!fs.existsSync(downloadsDir)) fs.mkdirSync(downloadsDir);
 }
 
-// Inicia browser y retorna { browser, page }
+/**
+ * Inicia una instancia de Chromium (no headless) y retorna el navegador y una nueva página.
+ * @returns { browser, page }
+ */
 export async function iniciarBrowser(): Promise<{
   browser: Browser;
   page: Page;
@@ -21,7 +24,10 @@ export async function iniciarBrowser(): Promise<{
   return { browser, page };
 }
 
-// Inicia Sesion
+/**
+ * Realiza el login en la página usando credenciales predefinidas.
+ * @param page Página de Playwright sobre la cual interactuar.
+ */
 export async function iniciarSesion(page: Page) {
   await page.goto(
     "https://pruebatecnica-sherpa-production.up.railway.app/login"
@@ -31,7 +37,11 @@ export async function iniciarSesion(page: Page) {
   await page.click('button[type="submit"]');
 }
 
-// Espera a que la lista de manuscritos esté visible y cargada (sin spinner)
+/**
+ * Espera a que se cargue completamente la lista de manuscritos en la web.
+ * Espera a que desaparezca el spinner y estén visibles los títulos.
+ * @param page Página de Playwright sobre la cual interactuar.
+ */
 export async function cargaManuscritos(page: Page) {
   await page.waitForSelector(".animate-spin", { state: "detached" });
   await page.waitForSelector("div.p-4 h3");

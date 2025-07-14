@@ -2,7 +2,9 @@ import axios from "axios";
 import { Page } from "playwright";
 import clipboardy from "clipboardy";
 
-// Cierra el modal (ajustá el selector según tu caso)
+/**
+ * Intenta cerrar el modal actual de varias maneras, según el selector disponible.
+ */
 export async function cerrarModal(page: Page) {
   let btnCerrar = await page.$('button:text("Cerrar")');
   if (!btnCerrar)
@@ -35,11 +37,16 @@ export async function cerrarModal(page: Page) {
     }
   }
 }
-
+/**
+ * A partir de un array de vault y targets, arma el string final del código.
+ */
 function obtenerCodigo(vault: string[], targets: number[]): string {
   return targets.map((idx) => vault[idx]).join("");
 }
-
+/**
+ * Resuelve el desafío de la API llamando a una URL obtenida del modal, usando axios.
+ * Si la API da error 400, devuelve el código anterior.
+ */
 export async function resolverDesafioApi(
   page: Page,
   bookTitle: string,
@@ -82,7 +89,7 @@ export async function resolverDesafioApi(
         throw error; // Otros errores los tirás normalmente
       }
     }
-
+    console.log("---------------", codigo);
     return codigo;
   } catch (error) {
     console.error("Error en llamar a la api:", error);
